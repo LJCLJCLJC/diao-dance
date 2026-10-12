@@ -1,0 +1,10 @@
+node_modules
+dist
+*.log
+.DS_Store
+tools/.venv
+__pycache__
+
+# Source video, frames, face crops and review renders stay local (not published).
+reference/
+.img2threejs/

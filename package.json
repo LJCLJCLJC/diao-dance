@@ -1,0 +1,21 @@
+{
+  "name": "diao-dance",
+  "private": true,
+  "version": "0.1.0",
+  "description": "刁一次：真人 3D 舞蹈互动网页",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "typescript": "~5.9.3",
+    "vite": "^6.4.4"
+  }
+}

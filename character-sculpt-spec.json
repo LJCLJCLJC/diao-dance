@@ -1,0 +1,5103 @@
+{
+  "targetName": "Diao Guy",
+  "targetId": "diao-guy",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "D:\\Repos\\diao-dance\\reference\\hero_t3.0_isolated.png",
+  "referenceCamera": {
+    "type": "perspective",
+    "fov": 48,
+    "position": [
+      0.35,
+      1.45,
+      1.75
+    ],
+    "target": [
+      0.0,
+      0.95,
+      0.0
+    ],
+    "notes": "Phone at chest height ~1.6 m in front, slightly to the subject's left, looking down (estimated from foreshortening)."
+  },
+  "suitability": "conditional",
+  "scores": {
+    "object_isolation": 0,
+    "silhouette_readability": 0,
+    "depth_inference": 0,
+    "primitive_decomposition": 0,
+    "material_procedurality": 0,
+    "occlusion_risk": 0,
+    "interaction_fit": 0
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "real-person casual-outfit humanoid",
+      "primaryDomain": "character",
+      "formLanguage": [
+        "organic",
+        "soft-cloth",
+        "boxy-oversized-garment"
+      ],
+      "structureKind": [
+        "articulated-humanoid",
+        "layered-clothing-shells",
+        "rigid-accessories"
+      ],
+      "motionPotential": [
+        "full-body dance",
+        "arm swing",
+        "hip sway",
+        "head turn",
+        "jaw/mouth open",
+        "cloth hem secondary motion"
+      ],
+      "materialFamilies": [
+        "woven cotton",
+        "denim twill",
+        "skin",
+        "hair",
+        "leather/rubber sneaker",
+        "metal/acetate glasses",
+        "glass phone"
+      ],
+      "notes": "Single low-resolution night frame plus face frames; projection-first face, procedural clothing."
+    },
+    "complexity": {
+      "tier": "complex",
+      "scores": {
+        "silhouetteComplexity": 2,
+        "componentCount": 3,
+        "hierarchyDepth": 3,
+        "repetitionDensity": 2,
+        "materialLayerCount": 3,
+        "localDetailDensity": 2,
+        "occlusionRisk": 2,
+        "actionReadinessNeed": 3
+      },
+      "estimatedCounts": {
+        "macroComponents": 6,
+        "mesoComponents": 14,
+        "microFeatureGroups": 7,
+        "materialLayers": 8,
+        "repetitionSystems": 3
+      },
+      "reasoning": [
+        "Humanoid with layered clothing shells (shirt over jeans), a skinned 23-bone rig and rigid accessories.",
+        "Repetition: placket buttons, pinstripes, denim twill, hair clumps.",
+        "Action readiness is maximal: the model must dance from motion capture and open its mouth with audio."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "complex",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Complex: articulated character with cross-joint cloth shells and repeated micro detail."
+    },
+    "unknownsToResolveBeforeImplementation": [],
+    "detailInventory": {
+      "scanMethod": "grid-3x3",
+      "targetMinDetails": 10,
+      "note": "Enumerate every identity-defining small detail before authoring the spec. Each detail must map to a component.localFeatures entry or material.localOverrides entry, never prose only. Use forge/stage1_intake/build_detail_inventory.py to scan zones.",
+      "details": [
+        {
+          "id": "glasses-rim",
+          "kind": "contour",
+          "description": "Thin dark rectangular glasses rims around both eyes with a narrow bridge.",
+          "region": {
+            "x": 0.58,
+            "y": 0.1,
+            "width": 0.2,
+            "height": 0.04,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "silhouette+albedo",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "glasses/rim-loops"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r0c1.png",
+          "confidence": 0.8
+        },
+        {
+          "id": "hair-top-volume",
+          "kind": "ridge",
+          "description": "Short black hair with a fuller swept top and short sides above the ears.",
+          "region": {
+            "x": 0.58,
+            "y": 0.03,
+            "width": 0.18,
+            "height": 0.06,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "hair/top-clumps"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r0c1.png",
+          "confidence": 0.75
+        },
+        {
+          "id": "face-flush",
+          "kind": "stain",
+          "description": "Red flush over cheeks and nose under warm light (kept in projected face texture).",
+          "region": {
+            "x": 0.62,
+            "y": 0.1,
+            "width": 0.14,
+            "height": 0.07,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "albedo",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "face-projection/flush"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r0c1.png",
+          "confidence": 0.6
+        },
+        {
+          "id": "shirt-pinstripes",
+          "kind": "linework",
+          "description": "Fine vertical pinstripes, blue-violet and pink, on light lavender cotton.",
+          "region": {
+            "x": 0.4,
+            "y": 0.2,
+            "width": 0.42,
+            "height": 0.3,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "albedo",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "shirt/pinstripes"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r1c1.png",
+          "confidence": 0.55
+        },
+        {
+          "id": "shirt-placket-buttons",
+          "kind": "fastener",
+          "description": "Front button placket with small light buttons, top button open.",
+          "region": {
+            "x": 0.6,
+            "y": 0.2,
+            "width": 0.04,
+            "height": 0.3,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "geometry+albedo",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shirt-shell/placket-buttons"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r1c1.png",
+          "confidence": 0.6
+        },
+        {
+          "id": "shirt-chest-pocket",
+          "kind": "seam",
+          "description": "Patch pocket on the wearer's left chest, square, stitched edges.",
+          "region": {
+            "x": 0.66,
+            "y": 0.24,
+            "width": 0.08,
+            "height": 0.06,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shirt-shell/chest-pocket"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r1c2.png",
+          "confidence": 0.6
+        },
+        {
+          "id": "shirt-collar",
+          "kind": "ridge",
+          "description": "Point collar open at the neck, collar points lying on the upper chest.",
+          "region": {
+            "x": 0.56,
+            "y": 0.17,
+            "width": 0.16,
+            "height": 0.04,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shirt-shell/collar"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r0c1.png",
+          "confidence": 0.7
+        },
+        {
+          "id": "shirt-hem",
+          "kind": "seam",
+          "description": "Straight untucked hem hanging to upper thigh, slightly flared.",
+          "region": {
+            "x": 0.38,
+            "y": 0.45,
+            "width": 0.42,
+            "height": 0.05,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "shirt-shell/hem-flare"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r1c1.png",
+          "confidence": 0.75
+        },
+        {
+          "id": "shirt-fold-ao",
+          "kind": "seam",
+          "description": "Soft fold shading at elbows, waist and sleeve cuffs.",
+          "region": {
+            "x": 0.38,
+            "y": 0.3,
+            "width": 0.46,
+            "height": 0.2,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "ao",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "shirt/fold-ao"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r1c0.png",
+          "confidence": 0.5
+        },
+        {
+          "id": "jeans-rolled-cuff",
+          "kind": "ridge",
+          "description": "Rolled cuff band (~4 cm) at both jeans hems resting on the shoe collar.",
+          "region": {
+            "x": 0.34,
+            "y": 0.7,
+            "width": 0.4,
+            "height": 0.05,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "silhouette",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "jeans-shell/rolled-cuff"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r2c1.png",
+          "confidence": 0.8
+        },
+        {
+          "id": "denim-twill",
+          "kind": "linework",
+          "description": "Diagonal twill grain and light fading on thighs and knees.",
+          "region": {
+            "x": 0.36,
+            "y": 0.5,
+            "width": 0.36,
+            "height": 0.2,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "albedo+normal",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "denim/twill"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r2c1.png",
+          "confidence": 0.5
+        },
+        {
+          "id": "sneaker-sole",
+          "kind": "seam",
+          "description": "White rubber cup sole band around the low-top upper.",
+          "region": {
+            "x": 0.33,
+            "y": 0.73,
+            "width": 0.4,
+            "height": 0.08,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "geometry",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "sneaker-l/sole-band"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r2c1.png",
+          "confidence": 0.7
+        },
+        {
+          "id": "phone-gloss",
+          "kind": "gloss",
+          "description": "Dark glossy phone held in the left hand.",
+          "region": {
+            "x": 0.77,
+            "y": 0.45,
+            "width": 0.05,
+            "height": 0.05,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "roughness",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "phone-glass/screen-gloss"
+          },
+          "evidenceRef": "D:\\Repos\\diao-dance\\.img2threejs\\detail-inventory\\zone-r1c2.png",
+          "confidence": 0.45
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": true,
+      "styleHeads": 7.0,
+      "proportions": {
+        "headUnit": 0.144,
+        "torso": 3.05,
+        "legs": 2.44,
+        "shoulderWidth": 1.8,
+        "hipWidth": 1.4
+      },
+      "pose": {
+        "type": "relaxed contrapposto, weight on right leg, left foot back and turned out, head yawed to his left, smiling",
+        "jointAngles": {
+          "neck": [
+            0,
+            15,
+            4
+          ],
+          "leftShoulder": [
+            0,
+            0,
+            -10
+          ],
+          "rightShoulder": [
+            0,
+            0,
+            10
+          ],
+          "leftElbow": [
+            -12,
+            0,
+            0
+          ],
+          "rightElbow": [
+            -10,
+            0,
+            0
+          ],
+          "leftWrist": [
+            0,
+            0,
+            0
+          ],
+          "rightWrist": [
+            0,
+            0,
+            0
+          ],
+          "leftHip": [
+            -8,
+            30,
+            -4
+          ],
+          "rightHip": [
+            4,
+            -5,
+            8
+          ],
+          "leftKnee": [
+            10,
+            0,
+            0
+          ],
+          "rightKnee": [
+            4,
+            0,
+            0
+          ],
+          "leftAnkle": [
+            0,
+            0,
+            0
+          ],
+          "rightAnkle": [
+            0,
+            0,
+            0
+          ]
+        },
+        "confidence": 0.7
+      },
+      "faceLandmarks": {
+        "eyeLine": 0.58,
+        "eyeSpacing": 0.3,
+        "noseBase": 0.76,
+        "mouthLine": 0.83,
+        "hairline": 0.27
+      },
+      "features": [
+        "thin dark rectangular glasses",
+        "short black hair, fuller on top, short sides",
+        "broad smile",
+        "oversized lavender pinstripe shirt untucked",
+        "light-blue straight jeans with rolled cuffs",
+        "white low-top sneakers",
+        "phone in left hand"
+      ],
+      "confidence": 0.62,
+      "evidenceRef": ".img2threejs/anatomy.json; reference/pose/raw.json frame 90"
+    },
+    "sourceImage": "D:\\Repos\\diao-dance\\reference\\hero_t3.0_isolated.png",
+    "pipelineRouting": {
+      "version": 1,
+      "track": "character-v1.5",
+      "source": "explicit",
+      "status": "resolved",
+      "classification": {
+        "kind": "character",
+        "confidence": 1.0,
+        "evidenceRefs": [
+          "pipeline-routing:explicit:character-v1.5"
+        ],
+        "provider": "pipeline-routing-cli",
+        "version": "1"
+      },
+      "conflicts": []
+    },
+    "resolvedUnknowns": [
+      {
+        "unknown": "Back of head, shirt and jeans are hidden: infer by symmetry and palette continuation (confidence 0.4).",
+        "resolution": "accepted as a documented assumption (see spec.assumptions)"
+      },
+      {
+        "unknown": "Face texture source ~45 px wide: likeness limited, user accepted softness.",
+        "resolution": "accepted as a documented assumption (see spec.assumptions)"
+      },
+      {
+        "unknown": "Exact pinstripe pitch and colours are below source resolution: procedural approximation.",
+        "resolution": "accepted as a documented assumption (see spec.assumptions)"
+      },
+      {
+        "unknown": "Body shape under oversized clothing undetermined: average adult build.",
+        "resolution": "accepted as a documented assumption (see spec.assumptions)"
+      },
+      {
+        "unknown": "Upper body motion in 0-2.1 s is out of frame: hand-keyed, not captured.",
+        "resolution": "accepted as a documented assumption (see spec.assumptions)"
+      }
+    ]
+  },
+  "qualityContract": {
+    "qualityBar": "complex",
+    "definitionOfDone": [
+      "The rendered model matches the reference silhouette, primary proportions, visible component hierarchy, material response, and most recognizable local features for the selected fidelity tier.",
+      "Face reads as the person from the video at the hero camera; outfit colours match the white-balanced palette; the rig dances the captured motion without visible tearing."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 3,
+      "mesoComponents": 8,
+      "microFeatureGroups": 5,
+      "materialLayers": 3,
+      "repetitionSystems": 1,
+      "reviewViewpoints": 4
+    },
+    "featureGroups": [
+      {
+        "id": "overall-silhouette",
+        "name": "Overall silhouette and proportions",
+        "required": true,
+        "qualityCriteria": [
+          "Bounding shape, dominant curves, negative spaces, and scale relationships are explicitly described."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model reads as a generic placeholder instead of the reference object",
+          "major proportions are guessed without evidence"
+        ]
+      },
+      {
+        "id": "primary-structure",
+        "name": "Primary structure and hierarchy",
+        "required": true,
+        "qualityCriteria": [
+          "Major parts, joints, seams, contact points, and parent-child relationships are named before code generation."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "large visible parts are merged into one mesh",
+          "component hierarchy is too shallow for the observed complexity"
+        ]
+      },
+      {
+        "id": "attachment-joint-correctness",
+        "name": "Attachment and joint correctness",
+        "required": true,
+        "qualityCriteria": [
+          "Every visible child appendage, branch, limb, handle, connector, tube, cable, horn, wing, leg, or hinged part has an attachment contract with parent socket, localStart/localEnd, contact type, embed/overlap, and gap tolerance."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "child part root floats away from the parent",
+          "branch/limb/tube is centered in space instead of pivoting from its root",
+          "parent-child transform mixes world and local coordinates"
+        ]
+      },
+      {
+        "id": "surface-material-response",
+        "name": "Surface material response",
+        "required": true,
+        "qualityCriteria": [
+          "Albedo zones, roughness, normal/bump/displacement intent, cavity dirt, edge wear, and local overrides are specified where visible.",
+          "Important materials define independent albedo, roughness, height/normal, and AO responses instead of reusing one texture for unrelated PBR channels.",
+          "Surface response is decomposed into macro, meso, and micro frequency bands with scale and amplitude tied to object scale."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "surface looks like flat plastic",
+          "local material variation is missing or not tied to image evidence"
+        ]
+      },
+      {
+        "id": "reference-lookdev",
+        "name": "Reference color, material, and lighting response",
+        "required": true,
+        "qualityCriteria": [
+          "Material-pass names the reference-derived albedo palette, roughness variation, tactile normal/bump/displacement response, and local masks.",
+          "When a source image is available, run reference PBR extraction and require confidence >= 0.7 before treating maps as implementation-ready.",
+          "Lighting-pass names key/fill/rim or environment light, exposure, tone mapping, background, and contact shadow behavior.",
+          "Neutral, grazing-angle, and reference-matched renders prove that surface relief survives relighting and is not painted into albedo."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model has acceptable shape but reads as flat shaded or plastic",
+          "colors are a generic average instead of reference-observed local color zones",
+          "lighting is evenly ambient and cannot reproduce the source value range"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "silhouette and negative-space delta",
+      "component hierarchy depth delta",
+      "repetition density and distribution delta",
+      "material albedo/roughness/normal response delta",
+      "local feature placement and scale delta"
+    ],
+    "antiShallowSpecRules": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "mustNotDo": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ]
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.7,
+    "mustMatch": [
+      "macro silhouette and proportions",
+      "primary material albedo/roughness response",
+      "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+      "most recognizable local features"
+    ],
+    "niceToHave": [
+      "micro scratches, stains, chips, and dirt masks",
+      "secondary lighting match"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "three-quarter",
+      "side",
+      "thickness-axis",
+      "long-axis"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "anatomy-proportion",
+      "name": "Head-unit proportions and stance",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "form-refinement"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": true,
+      "componentRefs": [
+        "root",
+        "head",
+        "shirt-shell",
+        "jeans-shell"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "face-landmark-placement",
+      "name": "Projected face registered to the head (eyes, nose, mouth, glasses)",
+      "tier": "critical",
+      "passIds": [
+        "form-refinement",
+        "material-pass"
+      ],
+      "minimumScore": 0.7,
+      "mustPass": true,
+      "componentRefs": [
+        "head",
+        "glasses"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "pose-silhouette",
+      "name": "Pose and full-body silhouette",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "structural-pass"
+      ],
+      "minimumScore": 0.72,
+      "mustPass": true,
+      "componentRefs": [
+        "root",
+        "shirt-shell",
+        "jeans-shell"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "outfit-and-palette",
+      "name": "Shirt, jeans, sneakers and palette",
+      "tier": "important",
+      "passIds": [
+        "material-pass"
+      ],
+      "minimumScore": 0.7,
+      "mustPass": false,
+      "componentRefs": [
+        "shirt-shell",
+        "jeans-shell",
+        "sneaker-l",
+        "sneaker-r"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "dance-motion",
+      "name": "Dance timing and limb angles vs video",
+      "tier": "important",
+      "passIds": [
+        "interaction-pass"
+      ],
+      "minimumScore": 0.65,
+      "mustPass": false,
+      "componentRefs": [
+        "root"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "blockout",
+    "completedPasses": [],
+    "lastCompletedPass": "",
+    "blockedReason": "",
+    "nextRequiredEvidence": [
+      "Silhouette, stance and head size match the isolated hero frame at the hero camera.",
+      "browser render screenshot from your agent's browser/screenshot tool",
+      "side-by-side reference/render comparison sheet for AI vision review",
+      "AI vision score at or above the visual acceptance threshold",
+      "all critical semantic feature scores from the shared image pair at or above their thresholds",
+      "self-correction review appended with action=continue before the next pass"
+    ]
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 512,
+      "preferredTextureResolution": 1024,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": false,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry",
+        "documentedLimitation": "Source is a 320x568 night video frame under sodium light; crop PBR extraction falls below the 0.7 confidence target, so albedo uses white-balanced samples and other channels are procedural."
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "root",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [
+    "Hidden back of head/shirt/jeans inferred by symmetry and palette continuation (confidence 0.4).",
+    "Face texture is ~45 px wide at source; likeness limited and soft (accepted by the user).",
+    "Pinstripe pitch/colours approximated procedurally; below source resolution.",
+    "Average adult build under oversized clothing; 1.72 m, 7 head-units.",
+    "Upper-body motion in 0-2.1 s is hand-keyed because it is out of frame."
+  ],
+  "coordinateFrame": {
+    "front": "camera-facing side in the reference image",
+    "up": "image up direction",
+    "scaleReference": "unit scale; adjust after first browser render"
+  },
+  "silhouette": {
+    "boundingShape": "",
+    "aspectRatios": [],
+    "symmetry": "",
+    "dominantCurves": [],
+    "negativeSpaces": [],
+    "landmarks": []
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "path": "D:\\Repos\\diao-dance\\reference\\hero_t3.0_isolated.png",
+      "role": "full-body fixed view (t=3.0 s)"
+    },
+    {
+      "id": "face-closed",
+      "path": "D:\\Repos\\diao-dance\\reference\\faces\\face_closed_src.png",
+      "role": "face projection source, closed smile (frame 80)"
+    },
+    {
+      "id": "face-open",
+      "path": "D:\\Repos\\diao-dance\\reference\\faces\\face_open_src.png",
+      "role": "face projection source, open shout (frame 84)"
+    },
+    {
+      "id": "contact-sheet",
+      "path": "D:\\Repos\\diao-dance\\reference\\sheets\\sheet_every3.png",
+      "role": "motion reference"
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "root",
+      "name": "Character root",
+      "level": "macro",
+      "role": "root",
+      "importance": 0.3,
+      "confidence": 0.7,
+      "primitive": "box",
+      "topologyClass": "material-only",
+      "topologyRationale": "Invisible pivot group; owns the skeleton and sculptRuntime.",
+      "geometryDescriptor": {
+        "topologyIntent": "Character root",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": null,
+      "dimensions": {
+        "width": 0.5,
+        "height": 1.72,
+        "depth": 0.35,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "skinned",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hips",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": true,
+          "twist": true,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "hidden"
+        }
+      },
+      "material": "hidden",
+      "materialLayers": [
+        "hidden"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "hero",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(0, 0, 0, 1.0)",
+        "secondaryAlbedo": "rgba(0, 0, 0, 1.0)",
+        "materialClass": "unknown",
+        "materialClassConfidence": 1.0,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      }
+    },
+    {
+      "id": "head",
+      "name": "Head with projected face",
+      "level": "macro",
+      "role": "head",
+      "importance": 1.0,
+      "confidence": 0.6,
+      "primitive": "ellipsoid",
+      "topologyClass": "continuous-sculpt",
+      "topologyRationale": "One continuous deformed-sphere head volume so the projected face stays seamless; jaw region skinned to the jaw bone.",
+      "geometryDescriptor": {
+        "topologyIntent": "deformed UV sphere 64x48 (chin taper, face flattening, nose bump, eye-socket dip)",
+        "uvStrategy": "orthographic front projection of bind-pose vertices into the 512x738 face layout",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.16,
+        "height": 0.245,
+        "depth": 0.2,
+        "units": "metres",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          1.6,
+          0.005
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "skinned",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hips",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": true,
+          "twist": true,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "head",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "face-projection"
+        }
+      },
+      "material": "face-projection",
+      "materialLayers": [
+        "face-projection"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "nose-bump",
+          "kind": "ridge",
+          "description": "Gaussian nose displacement aligned to the projected nose tip"
+        },
+        {
+          "id": "jaw-hinge",
+          "kind": "seam",
+          "description": "Jaw-weighted vertices below the mouth line open with the voice"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "hero",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(217, 164, 143, 1.0)",
+        "secondaryAlbedo": "rgba(196, 128, 110, 1.0)",
+        "materialClass": "skin",
+        "materialClassConfidence": 0.85,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)",
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(217, 164, 143, 1.0)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(196, 128, 110, 1.0)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "neck",
+      "name": "Neck",
+      "level": "meso",
+      "role": "connector",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "tube",
+      "topologyClass": "conforming-shell",
+      "topologyRationale": "Short skinned tube bridging chest and head.",
+      "geometryDescriptor": {
+        "topologyIntent": "Neck",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.105,
+        "height": 0.16,
+        "depth": 0.1,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          1.48,
+          -0.005
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "skinned",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hips",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": true,
+          "twist": true,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "neck",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "skin"
+        }
+      },
+      "material": "skin",
+      "materialLayers": [
+        "skin"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(217, 164, 143, 1.0)",
+        "secondaryAlbedo": "rgba(201, 141, 121, 1.0)",
+        "materialClass": "skin",
+        "materialClassConfidence": 0.8,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:chest",
+        "localStart": [
+          0,
+          1.4,
+          -0.01
+        ],
+        "localEnd": [
+          0,
+          1.56,
+          0.0
+        ],
+        "contactType": "overlap",
+        "baseRadius": 0.052,
+        "endRadius": 0.05,
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.005,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "hair",
+      "name": "Hair clumps",
+      "level": "meso",
+      "role": "head",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "instanced-cluster",
+      "topologyClass": "fiber-strand",
+      "topologyRationale": "Scalp cap shell cut at the hairline plus swept clumps for the fuller top.",
+      "geometryDescriptor": {
+        "topologyIntent": "Hair clumps",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "head",
+      "dimensions": {
+        "width": 0.17,
+        "height": 0.09,
+        "depth": 0.21,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          1.68,
+          -0.005
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "head",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "hair",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "hair"
+        }
+      },
+      "material": "hair",
+      "materialLayers": [
+        "hair"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "top-clumps",
+          "kind": "ridge",
+          "description": "~14 elongated clumps swept back/up over the crown"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(22, 18, 15, 1.0)",
+        "secondaryAlbedo": "rgba(36, 28, 23, 1.0)",
+        "materialClass": "unknown",
+        "materialClassConfidence": 0.6,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:head",
+        "localStart": [
+          0,
+          0.1,
+          -0.01
+        ],
+        "localEnd": [
+          0,
+          0.19,
+          -0.01
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "ear-l",
+      "name": "Ear L",
+      "level": "meso",
+      "role": "head",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "ellipsoid",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Small rigid ear on the head bone.",
+      "geometryDescriptor": {
+        "topologyIntent": "Ear L",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "head",
+      "dimensions": {
+        "width": 0.02,
+        "height": 0.06,
+        "depth": 0.035,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0.079,
+          1.575,
+          -0.01
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "head",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "ear-l",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "skin"
+        }
+      },
+      "material": "skin",
+      "materialLayers": [
+        "skin"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(217, 164, 143, 1.0)",
+        "secondaryAlbedo": "rgba(201, 141, 121, 1.0)",
+        "materialClass": "skin",
+        "materialClassConfidence": 0.7,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:head",
+        "localStart": [
+          0.075,
+          0.04,
+          -0.01
+        ],
+        "localEnd": [
+          0.083,
+          0.04,
+          -0.01
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "ear-r",
+      "name": "Ear R",
+      "level": "meso",
+      "role": "head",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "ellipsoid",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Small rigid ear on the head bone.",
+      "geometryDescriptor": {
+        "topologyIntent": "Ear R",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "head",
+      "dimensions": {
+        "width": 0.02,
+        "height": 0.06,
+        "depth": 0.035,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          -0.079,
+          1.575,
+          -0.01
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "head",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "ear-r",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "skin"
+        }
+      },
+      "material": "skin",
+      "materialLayers": [
+        "skin"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(217, 164, 143, 1.0)",
+        "secondaryAlbedo": "rgba(201, 141, 121, 1.0)",
+        "materialClass": "skin",
+        "materialClassConfidence": 0.7,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:head",
+        "localStart": [
+          -0.075,
+          0.04,
+          -0.01
+        ],
+        "localEnd": [
+          -0.083,
+          0.04,
+          -0.01
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "glasses",
+      "name": "Glasses",
+      "level": "meso",
+      "role": "head",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "torus",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Thin rim loops + bridge + temples registered over the glasses baked into the face photo.",
+      "geometryDescriptor": {
+        "topologyIntent": "Glasses",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "head",
+      "dimensions": {
+        "width": 0.15,
+        "height": 0.04,
+        "depth": 0.12,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          1.585,
+          0.085
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "head",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "glasses",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "glasses-frame"
+        }
+      },
+      "material": "glasses-frame",
+      "materialLayers": [
+        "glasses-frame"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "rim-loops",
+          "kind": "contour",
+          "description": "Two rounded-rectangle rim loops (tube radius 1.6 mm)"
+        },
+        {
+          "id": "bridge",
+          "kind": "ridge",
+          "description": "Narrow bridge over the nose"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(26, 23, 24, 1.0)",
+        "secondaryAlbedo": "rgba(43, 37, 38, 1.0)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.6,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:head",
+        "localStart": [
+          0,
+          0.05,
+          0.08
+        ],
+        "localEnd": [
+          0,
+          0.05,
+          0.09
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "shirt-shell",
+      "name": "Oversized pinstripe shirt",
+      "level": "macro",
+      "role": "torso",
+      "importance": 0.95,
+      "confidence": 0.75,
+      "primitive": "tube",
+      "topologyClass": "conforming-shell",
+      "topologyRationale": "Cross-joint shell over torso and both arms (L4): skinned to spine, chest, clavicles, arms and hem springs.",
+      "geometryDescriptor": {
+        "topologyIntent": "lofted ring tube along bone chain, superellipse sections",
+        "uvStrategy": "authored: u around section, v along chain",
+        "normalStrategy": "smooth vertex normals",
+        "skinning": "per-ring bone weights blended across joints (cosine falloff)"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.42,
+        "height": 0.7,
+        "depth": 0.29,
+        "units": "metres",
+        "confidence": 0.75
+      },
+      "transform": {
+        "position": [
+          0,
+          1.08,
+          -0.005
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "skinned",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hips",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": true,
+          "twist": true,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "shirt-shell",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "shirt"
+        }
+      },
+      "material": "shirt",
+      "materialLayers": [
+        "shirt"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "collar",
+          "kind": "ridge",
+          "description": "Point collar band + two collar points on the upper chest"
+        },
+        {
+          "id": "chest-pocket",
+          "kind": "seam",
+          "description": "Patch pocket on the wearer's left chest"
+        },
+        {
+          "id": "placket-buttons",
+          "kind": "fastener",
+          "description": "Placket strip with 6 buttons (instanced), top open"
+        },
+        {
+          "id": "hem-flare",
+          "kind": "seam",
+          "description": "Untucked straight hem flaring to upper thigh, driven by hem springs"
+        },
+        {
+          "id": "sleeve-cuffs",
+          "kind": "ridge",
+          "description": "Slightly wider cuff rings at the wrists"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "hero",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(216, 207, 228, 1.0)",
+        "secondaryAlbedo": "rgba(143, 134, 191, 1.0)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.85,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:spine",
+        "localStart": [
+          0,
+          0.74,
+          -0.005
+        ],
+        "localEnd": [
+          0,
+          1.43,
+          -0.01
+        ],
+        "contactType": "overlap",
+        "baseRadius": 0.19,
+        "endRadius": 0.075,
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.005,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "buttons",
+      "name": "Placket buttons",
+      "level": "micro",
+      "role": "fastener",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "cylinder",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Instanced small discs along the placket, each riding the nearest spine bone.",
+      "geometryDescriptor": {
+        "topologyIntent": "Placket buttons",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "shirt-shell",
+      "dimensions": {
+        "width": 0.009,
+        "height": 0.009,
+        "depth": 0.003,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0,
+          1.1,
+          0.14
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "chest",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "buttons",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "sneaker-rubber"
+        }
+      },
+      "material": "sneaker-rubber",
+      "materialLayers": [
+        "sneaker-rubber"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(236, 232, 225, 1.0)",
+        "secondaryAlbedo": "rgba(208, 203, 194, 1.0)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.5,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:chest",
+        "localStart": [
+          0,
+          -0.4,
+          0.14
+        ],
+        "localEnd": [
+          0,
+          0.05,
+          0.14
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "jeans-shell",
+      "name": "Straight light-blue jeans",
+      "level": "macro",
+      "role": "leg",
+      "importance": 0.9,
+      "confidence": 0.75,
+      "primitive": "tube",
+      "topologyClass": "conforming-shell",
+      "topologyRationale": "Two lofted leg tubes overlapping into the pelvis (L4), skinned hips->thigh->shin.",
+      "geometryDescriptor": {
+        "topologyIntent": "lofted ring tube along bone chain, superellipse sections",
+        "uvStrategy": "authored: u around section, v along chain",
+        "normalStrategy": "smooth vertex normals",
+        "skinning": "per-ring bone weights blended across joints (cosine falloff)"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.36,
+        "height": 0.92,
+        "depth": 0.2,
+        "units": "metres",
+        "confidence": 0.75
+      },
+      "transform": {
+        "position": [
+          0,
+          0.55,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "skinned",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hips",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": true,
+          "twist": true,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "jeans-shell",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "denim"
+        }
+      },
+      "material": "denim",
+      "materialLayers": [
+        "denim"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "rolled-cuff",
+          "kind": "ridge",
+          "description": "4 cm rolled cuff band at both ankles"
+        },
+        {
+          "id": "waistband",
+          "kind": "seam",
+          "description": "Waistband ring hidden under the shirt hem"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "hero",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(113, 135, 168, 1.0)",
+        "secondaryAlbedo": "rgba(93, 113, 147, 1.0)",
+        "materialClass": "fabric",
+        "materialClassConfidence": 0.85,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)",
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(142, 162, 192, 1.0)"
+            },
+            {
+              "position": 0.5,
+              "color": "rgba(113, 135, 168, 1.0)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(93, 113, 147, 1.0)"
+            }
+          ]
+        }
+      },
+      "attachment": {
+        "parentSocket": "bone:hips",
+        "localStart": [
+          0,
+          1.0,
+          0
+        ],
+        "localEnd": [
+          0,
+          0.09,
+          0
+        ],
+        "contactType": "overlap",
+        "baseRadius": 0.105,
+        "endRadius": 0.07,
+        "embedDepth": 0.02,
+        "overlap": 0.02,
+        "gapTolerance": 0.005,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "hand-l",
+      "name": "Hand L",
+      "level": "meso",
+      "role": "limb",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "capsule",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Relaxed curled hand, rigid on hand-l.",
+      "geometryDescriptor": {
+        "topologyIntent": "Hand L",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.08,
+        "height": 0.17,
+        "depth": 0.04,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0.255,
+          0.78,
+          0.008
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hand-l",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [
+          {
+            "id": "grip-l",
+            "bone": "hand-l",
+            "localPosition": [
+              0.0,
+              -0.08,
+              0.02
+            ]
+          }
+        ],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "hand-l",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "skin"
+        }
+      },
+      "material": "skin",
+      "materialLayers": [
+        "skin"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(217, 164, 143, 1.0)",
+        "secondaryAlbedo": "rgba(201, 141, 121, 1.0)",
+        "materialClass": "skin",
+        "materialClassConfidence": 0.75,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:hand-l",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          0.01,
+          -0.17,
+          0.015
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "hand-r",
+      "name": "Hand R",
+      "level": "meso",
+      "role": "limb",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "capsule",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Relaxed curled hand, rigid on hand-r.",
+      "geometryDescriptor": {
+        "topologyIntent": "Hand R",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.08,
+        "height": 0.17,
+        "depth": 0.04,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          -0.255,
+          0.78,
+          0.008
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hand-r",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "hand-r",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "skin"
+        }
+      },
+      "material": "skin",
+      "materialLayers": [
+        "skin"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(217, 164, 143, 1.0)",
+        "secondaryAlbedo": "rgba(201, 141, 121, 1.0)",
+        "materialClass": "skin",
+        "materialClassConfidence": 0.75,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:hand-r",
+        "localStart": [
+          0,
+          0,
+          0
+        ],
+        "localEnd": [
+          -0.01,
+          -0.17,
+          0.015
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "phone",
+      "name": "Phone",
+      "level": "meso",
+      "role": "handle",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rounded slab gripped in the left hand.",
+      "geometryDescriptor": {
+        "topologyIntent": "Phone",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "hand-l",
+      "dimensions": {
+        "width": 0.072,
+        "height": 0.15,
+        "depth": 0.008,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0.26,
+          0.77,
+          0.03
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "hand-l",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "phone",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "phone-glass"
+        }
+      },
+      "material": "phone-glass",
+      "materialLayers": [
+        "phone-glass"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(20, 21, 24, 1.0)",
+        "secondaryAlbedo": "rgba(42, 44, 51, 1.0)",
+        "materialClass": "glass",
+        "materialClassConfidence": 0.5,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:hand-l",
+        "localStart": [
+          0,
+          -0.06,
+          0.025
+        ],
+        "localEnd": [
+          0,
+          -0.12,
+          0.025
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "sneaker-l",
+      "name": "Sneaker L",
+      "level": "meso",
+      "role": "support",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "extrude",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Lofted low-top upper + rubber cup sole, rigid on foot-l.",
+      "geometryDescriptor": {
+        "topologyIntent": "Sneaker L",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.1,
+        "height": 0.09,
+        "depth": 0.27,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          0.11,
+          0.04,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "foot-l",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "sneaker-l",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "sneaker-leather"
+        }
+      },
+      "material": "sneaker-leather",
+      "materialLayers": [
+        "sneaker-leather"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "sole-band",
+          "kind": "seam",
+          "description": "Rubber cup sole band 2.5 cm"
+        },
+        {
+          "id": "laces",
+          "kind": "stitch",
+          "description": "Lace rows on the tongue"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(241, 236, 230, 1.0)",
+        "secondaryAlbedo": "rgba(220, 213, 204, 1.0)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.6,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:foot-l",
+        "localStart": [
+          0,
+          -0.08,
+          0.0
+        ],
+        "localEnd": [
+          0,
+          -0.06,
+          0.18
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    },
+    {
+      "id": "sneaker-r",
+      "name": "Sneaker R",
+      "level": "meso",
+      "role": "support",
+      "importance": 0.6,
+      "confidence": 0.7,
+      "primitive": "extrude",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Lofted low-top upper + rubber cup sole, rigid on foot-r.",
+      "geometryDescriptor": {
+        "topologyIntent": "Sneaker R",
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "smooth vertex normals"
+      },
+      "parent": "root",
+      "dimensions": {
+        "width": 0.1,
+        "height": 0.09,
+        "depth": 0.27,
+        "units": "metres",
+        "confidence": 0.7
+      },
+      "transform": {
+        "position": [
+          -0.11,
+          0.04,
+          0.05
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "bone-attached",
+        "pivot": {
+          "mode": "bone",
+          "bone": "foot-r",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.8
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": false,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": false
+        },
+        "sockets": [],
+        "collider": {
+          "type": "capsule",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "click/pick proxy"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "sneaker-r",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "sneaker-leather"
+        }
+      },
+      "material": "sneaker-leather",
+      "materialLayers": [
+        "sneaker-leather"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "sole-band",
+          "kind": "seam",
+          "description": "Rubber cup sole band 2.5 cm"
+        },
+        {
+          "id": "laces",
+          "kind": "stitch",
+          "description": "Lace rows on the tongue"
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "standard",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(241, 236, 230, 1.0)",
+        "secondaryAlbedo": "rgba(220, 213, 204, 1.0)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.6,
+        "evidenceRef": "palette.json (white-balanced against the sneakers)"
+      },
+      "attachment": {
+        "parentSocket": "bone:foot-r",
+        "localStart": [
+          0,
+          -0.08,
+          0.0
+        ],
+        "localEnd": [
+          0,
+          -0.06,
+          0.18
+        ],
+        "contactType": "socket",
+        "embedDepth": 0.005,
+        "overlap": 0.005,
+        "gapTolerance": 0.004,
+        "evidenceRefs": [
+          "full-object"
+        ]
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "hidden",
+      "name": "Hidden root proxy",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#000000",
+      "color": "#000000",
+      "albedo": {
+        "dominant": "#000000",
+        "secondary": [
+          "#000000"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#000000",
+          "#000000"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "none"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "none"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "none"
+        }
+      ],
+      "roughness": {
+        "base": 1.0,
+        "variation": 0.0,
+        "map": "none (never rendered)"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "not rendered"
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": "Root/pivot only."
+    },
+    {
+      "id": "skin",
+      "name": "Skin (neck, ears, hands)",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#d9a48f",
+      "color": "#d9a48f",
+      "albedo": {
+        "dominant": "#d9a48f",
+        "secondary": [
+          "#c98d79",
+          "#e8b8a2"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#d9a48f",
+          "#c98d79",
+          "#e8b8a2"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "warm/cool zone shift"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "pore clusters"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "pore highlight breakup"
+        }
+      ],
+      "roughness": {
+        "base": 0.5,
+        "variation": 0.08,
+        "map": "procedural:skin-pores roughness canvas (independent seed)"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Vertex cavity darkening at knuckles, ear folds and under the jaw."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "face-projection",
+      "name": "Projected face (closed/open blend)",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial + onBeforeCompile (mix two face maps by uFaceOpen, alpha-masked over skin)",
+      "baseColor": "#d9a48f",
+      "color": "#d9a48f",
+      "albedo": {
+        "dominant": "#d9a48f",
+        "secondary": [
+          "#c4806e",
+          "#efc2ad"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#d9a48f",
+          "#c4806e",
+          "#efc2ad"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "orthographic-front-projection in head bind space",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "photo albedo macro"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "photo pores/teeth"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "pore roughness"
+        }
+      ],
+      "roughness": {
+        "base": 0.48,
+        "variation": 0.06,
+        "map": "procedural:skin-pores roughness canvas"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Baked in projected photo (eye sockets, nostrils, under-lip); no extra AO map."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [
+        {
+          "id": "flush",
+          "kind": "stain",
+          "region": "cheeks+nose",
+          "patinaColor": "#c4625a",
+          "fadedMask": false,
+          "notes": "Kept from the photo after white balance; not removed by de-light."
+        }
+      ],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "hair",
+      "name": "Hair clumps",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#16120f",
+      "color": "#16120f",
+      "albedo": {
+        "dominant": "#16120f",
+        "secondary": [
+          "#241c17",
+          "#0c0a09"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#16120f",
+          "#241c17",
+          "#0c0a09"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "clump mass value"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "strand groups"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "strand highlight"
+        }
+      ],
+      "roughness": {
+        "base": 0.45,
+        "variation": 0.15,
+        "map": "procedural:strand-streak roughness canvas stretched along clump length"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "strand streaks",
+        "strength": 0.3,
+        "scale": 12.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Root darkening toward the scalp via vertex colour."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "shirt",
+      "name": "Lavender pinstripe cotton",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#d8cfe4",
+      "color": "#d8cfe4",
+      "albedo": {
+        "dominant": "#d8cfe4",
+        "secondary": [
+          "#8f86bf",
+          "#c79bb0",
+          "#b9b0c8"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#d8cfe4",
+          "#8f86bf",
+          "#c79bb0",
+          "#b9b0c8"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "fold shading"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "weave rows"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "thread fuzz"
+        }
+      ],
+      "roughness": {
+        "base": 0.86,
+        "variation": 0.08,
+        "map": "procedural:plain-weave roughness canvas (own seed, independent of the stripe colour canvas)"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "plain-weave height field",
+        "strength": 0.25,
+        "scale": 40.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Fold AO canvas at waist, elbows and under the arms."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [
+        {
+          "id": "pinstripes",
+          "kind": "linework",
+          "technique": "painted line canvas",
+          "pitchPx": 6,
+          "colors": [
+            "#8f86bf",
+            "#c79bb0"
+          ],
+          "notes": "Vertical along the tube length; repeats 18x around the torso."
+        },
+        {
+          "id": "fold-ao",
+          "kind": "seam",
+          "aoStrength": 0.35,
+          "region": "waist, elbow inner, armpit, cuff"
+        }
+      ],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "denim",
+      "name": "Light-blue denim",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#7187a8",
+      "color": "#7187a8",
+      "albedo": {
+        "dominant": "#7187a8",
+        "secondary": [
+          "#5d7193",
+          "#8ea2c0",
+          "#4f5f7b"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#7187a8",
+          "#5d7193",
+          "#8ea2c0",
+          "#4f5f7b"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "thigh/knee fade"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "twill diagonals"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "fibre speckle"
+        }
+      ],
+      "roughness": {
+        "base": 0.9,
+        "variation": 0.06,
+        "map": "procedural:twill-diagonal roughness canvas"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "twill height field",
+        "strength": 0.35,
+        "scale": 60.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Crease AO at crotch, back of knee and above the rolled cuff."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [
+        {
+          "id": "twill",
+          "kind": "linework",
+          "technique": "diagonal 45 deg canvas lines + normal",
+          "notes": "Fades lighter on thighs and knees."
+        }
+      ],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "sneaker-leather",
+      "name": "White sneaker upper",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#f1ece6",
+      "color": "#f1ece6",
+      "albedo": {
+        "dominant": "#f1ece6",
+        "secondary": [
+          "#dcd5cc",
+          "#ffffff"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#f1ece6",
+          "#dcd5cc",
+          "#ffffff"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "toe crease"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "leather grain"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "grain highlight"
+        }
+      ],
+      "roughness": {
+        "base": 0.55,
+        "variation": 0.1,
+        "map": "procedural:leather-grain roughness canvas"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Darkened toe crease and lace eyelets."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "sneaker-rubber",
+      "name": "White rubber sole",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#ece8e1",
+      "color": "#ece8e1",
+      "albedo": {
+        "dominant": "#ece8e1",
+        "secondary": [
+          "#d0cbc2"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#ece8e1",
+          "#d0cbc2"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "sole value"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "tread"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "speckle"
+        }
+      ],
+      "roughness": {
+        "base": 0.8,
+        "variation": 0.05,
+        "map": "procedural:rubber speckle roughness canvas"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "Dirt line along the bottom edge."
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": "Sole band and outsole."
+    },
+    {
+      "id": "glasses-frame",
+      "name": "Dark glasses frame",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#1a1718",
+      "color": "#1a1718",
+      "albedo": {
+        "dominant": "#1a1718",
+        "secondary": [
+          "#2b2526"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#1a1718",
+          "#2b2526"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "frame value"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "none"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "none"
+        }
+      ],
+      "roughness": {
+        "base": 0.35,
+        "variation": 0.05,
+        "map": "constant (frame too thin for a map)"
+      },
+      "metalness": {
+        "base": 0.3,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "none needed at this scale"
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "phone-glass",
+      "name": "Phone glass/back",
+      "type": "standard",
+      "shaderModel": "MeshStandardMaterial",
+      "baseColor": "#141518",
+      "color": "#141518",
+      "albedo": {
+        "dominant": "#141518",
+        "secondary": [
+          "#2a2c33"
+        ]
+      },
+      "colorVariation": {
+        "palette": [
+          "#141518",
+          "#2a2c33"
+        ],
+        "pattern": "procedural-canvas",
+        "amplitude": 0.06,
+        "heightCorrelation": 0.0
+      },
+      "textureResolution": 512,
+      "textureProjection": {
+        "mode": "uv",
+        "repeat": [
+          1.0,
+          1.0
+        ],
+        "anisotropy": 4,
+        "texelDensityIntent": "Canvas textures sized per part so micro detail keeps object scale on a phone screen."
+      },
+      "surfaceFrequencyBands": [
+        {
+          "id": "macro",
+          "frequency": 2.0,
+          "amplitude": 0.3,
+          "role": "body value"
+        },
+        {
+          "id": "meso",
+          "frequency": 14.0,
+          "amplitude": 0.18,
+          "role": "camera bump"
+        },
+        {
+          "id": "micro",
+          "frequency": 64.0,
+          "amplitude": 0.06,
+          "role": "none"
+        }
+      ],
+      "roughness": {
+        "base": 0.3,
+        "variation": 0.05,
+        "map": "constant + screen gloss override"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "normal": {
+        "pattern": "none",
+        "strength": 0.0,
+        "scale": 1.0,
+        "space": "tangent"
+      },
+      "bump": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0
+      },
+      "displacement": {
+        "pattern": "none",
+        "amplitude": 0.0,
+        "scale": 1.0,
+        "silhouetteAffects": false
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.3,
+        "contactShadowBias": 0.3,
+        "notes": "none needed at this scale"
+      },
+      "wear": {
+        "edgeWear": 0.0,
+        "scratches": [],
+        "chips": []
+      },
+      "dirt": {
+        "amount": 0.0,
+        "cavityBias": 0.0,
+        "color": "#2F2A22"
+      },
+      "localOverrides": [
+        {
+          "id": "screen-gloss",
+          "kind": "gloss",
+          "roughness": 0.08,
+          "region": "front glass"
+        }
+      ],
+      "shaderNotes": [
+        "albedo, roughness, normal and AO generated independently (never albedo reused).",
+        "No referencePbr maps: 320x568 night frame under sodium light; albedo is the white-balanced palette sample."
+      ],
+      "notes": ""
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "placket-buttons",
+      "target": "buttons",
+      "count": 6,
+      "distribution": "linear",
+      "spacing": 0.085,
+      "realization": "instanced",
+      "buildsGeometry": true,
+      "geometry": "CylinderGeometry r=4.5mm h=2mm",
+      "notes": "Top button left open; each instance parented to chest/spine/hips by height."
+    },
+    {
+      "id": "hair-clumps",
+      "target": "hair",
+      "count": 14,
+      "distribution": "authored-arc",
+      "realization": "geometry",
+      "buildsGeometry": true,
+      "geometry": "deformed ellipsoid clumps"
+    },
+    {
+      "id": "pinstripes",
+      "target": "shirt-shell",
+      "count": 18,
+      "distribution": "around-section",
+      "realization": "map-only",
+      "buildsGeometry": false
+    }
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Rig + shells at realistic 7 HU proportions in the hero pose.",
+      "componentRefs": [
+        "root",
+        "head",
+        "neck",
+        "hair",
+        "ear-l",
+        "ear-r",
+        "glasses",
+        "shirt-shell",
+        "buttons",
+        "jeans-shell",
+        "hand-l",
+        "hand-r",
+        "phone",
+        "sneaker-l",
+        "sneaker-r"
+      ],
+      "acceptance": [
+        "Silhouette, stance and head size match the isolated hero frame at the hero camera."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Collar, pocket, placket, cuffs, ears, glasses, hands, sneakers and phone attached to their bones.",
+      "componentRefs": [
+        "root",
+        "head",
+        "neck",
+        "hair",
+        "ear-l",
+        "ear-r",
+        "glasses",
+        "shirt-shell",
+        "buttons",
+        "jeans-shell",
+        "hand-l",
+        "hand-r",
+        "phone",
+        "sneaker-l",
+        "sneaker-r"
+      ],
+      "acceptance": [
+        "Every accessory rides its bone; no floating parts in orbit views."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Head shape fitted to the face layout; shirt flare and jeans taper.",
+      "componentRefs": [
+        "head",
+        "shirt-shell",
+        "jeans-shell",
+        "hair"
+      ],
+      "acceptance": [
+        "Face reads as the person at the hero camera; side views keep volume."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Projected face, pinstripe/denim canvases, roughness/normal/AO maps.",
+      "componentRefs": [
+        "root",
+        "head",
+        "neck",
+        "hair",
+        "ear-l",
+        "ear-r",
+        "glasses",
+        "shirt-shell",
+        "buttons",
+        "jeans-shell",
+        "hand-l",
+        "hand-r",
+        "phone",
+        "sneaker-l",
+        "sneaker-r"
+      ],
+      "acceptance": [
+        "Palette matches white-balanced samples under the night lighting."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Warm street key, cool fill, rim, ACES exposure, ground shadow.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "Value range and warm cast resemble the video frame."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Dance/idle playback, jaw + face blend from voice, hem springs.",
+      "componentRefs": [
+        "root",
+        "head",
+        "shirt-shell"
+      ],
+      "acceptance": [
+        "Dance matches the 7 sampled video timestamps; mouth opens with the voice."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Mobile budget: < 60k triangles, 1 shadow light, textures <= 1024.",
+      "componentRefs": [
+        "root"
+      ],
+      "acceptance": [
+        "60 fps on a mid-range phone."
+      ]
+    }
+  ],
+  "visualEvidence": [],
+  "reviewHistory": [],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "targetTriangles": 60000,
+    "maxDrawCalls": 40,
+    "maxTextureSize": 1024,
+    "notes": "Phone-first."
+  },
+  "lightingFromPhoto": [
+    {
+      "id": "key",
+      "type": "spot/directional key light",
+      "color": "#ffb46b",
+      "direction": "front-right, high (casts the shadow back-left as in the video)",
+      "intensity": 2.6,
+      "castsShadow": true
+    },
+    {
+      "id": "fill",
+      "type": "hemisphere fill light",
+      "sky": "#30405a",
+      "ground": "#3a2a1a",
+      "intensity": 0.55
+    },
+    {
+      "id": "rim",
+      "type": "rim / environment light from the warm string lights behind",
+      "color": "#ffcf8a",
+      "intensity": 0.9
+    },
+    {
+      "id": "tone",
+      "notes": "ACES filmic tone mapping, exposure 1.05, sRGB output, dark blue-black background with fog"
+    },
+    {
+      "id": "ground",
+      "notes": "PCF soft ground shadow (contact shadow) under the feet from the key light"
+    }
+  ],
+  "proceduralStrategy": [
+    "Block out macro silhouette first.",
+    "Add component hierarchy and joints.",
+    "Create stable pivot groups, sockets, collider proxies, and destruction metadata before visual polish.",
+    "Refine forms with bevels, tapers, bends, and procedural noise.",
+    "Run reference PBR extraction for important source-image materials and stop when confidence is below the target threshold.",
+    "Add material variation before adding expensive micro-geometry."
+  ],
+  "animationAnchors": [
+    "root pivot node supports whole-object translation, rotation, scale, and visibility changes",
+    "component pivot groups support later local transforms without rebuilding geometry"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Diao Guy (IMG_0562 dancer) cotton shirt pinstripe denim jeans roughness skin subsurface roughness white sneaker leather rubber sole humanoid skinning shoulder elbow",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "6857e5ab528b42ac12f4f411f862610a0bffce8e47aee3610a7603c318072fe8"
+    },
+    "matches": [
+      {
+        "record_id": "core.pbr-subsurface-scattering-sss",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.material_pbr[5]",
+        "score": 9.073024913954,
+        "snippets": [
+          "Light transport property for opaque dielectrics where light penetrates and scatters internally before exiting (skin, wax, marble, some polymers). Đặc tính truyền ánh sáng của vật liệu điện môi mờ đục, ánh sáng xuyên vào và tán xạ bên trong trước ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[5]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.pbr-roughness",
+        "file_path": "grimoire/glossary/3d_vocabulary.md",
+        "heading": "Material And PBR",
+        "key_path": null,
+        "score": 4.20187819032,
+        "snippets": [
+          "Roughness is microfacet scatter: high roughness reads matte and low roughness reads glossy. Recognition cues: low roughness reads as a sharp, mirror-like, tight specular highlight; high roughness reads as a blurry, wide, dim highlight and matte ..."
+        ],
+        "source_refs": [
+          {
+            "path": "grimoire/glossary/3d_vocabulary.md",
+            "heading": "Material And PBR",
+            "key_path": null
+          },
+          {
+            "path": "grimoire/intake/image_analysis.md",
+            "heading": "Layer 5 — Materials & surface (PBR)",
+            "key_path": null
+          },
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[1]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "grimoire/glossary/3d_vocabulary.md"
+          },
+          {
+            "kind": "notebooklm-research",
+            "ref": "notebooklm:4b03c2f9-8393-411f-b5b4-039ab9532843",
+            "note": "Validated generic schema vocabulary; numeric claims remain backed by local source_refs."
+          },
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation — merged recognition cues + Three.js target instead of duplicating this entity."
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-reconstruction-metadata-schema",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[15]",
+        "score": 3.568924752552,
+        "snippets": [
+          "... kiểm tra pipeline. Recognition cues: Needed whenever an agent must trace a generated Three.js asset back to its source skin/paint_seed/rarity for QA or reproducibility Dấu hiệu nhận diện: Cần khi agent phải truy vết một tài sản Three.js đã ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[15]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      }
+    ]
+  },
+  "pipelineRouting": {
+    "version": 1,
+    "track": "character-v1.5",
+    "source": "explicit",
+    "status": "resolved",
+    "classification": {
+      "kind": "character",
+      "confidence": 1.0,
+      "evidenceRefs": [
+        "pipeline-routing:explicit:character-v1.5"
+      ],
+      "provider": "pipeline-routing-cli",
+      "version": "1"
+    },
+    "conflicts": []
+  },
+  "rig": {
+    "version": "2.0",
+    "bindPose": "relaxed-A (arms ~8 deg abducted, legs straight), all bone local rotations identity",
+    "forward": "+Z",
+    "units": "metres",
+    "skeleton": "one shared THREE.Skeleton for shirt, jeans, neck and head skinned meshes",
+    "bones": [
+      {
+        "id": "hips",
+        "parent": null,
+        "jointPos": [
+          0,
+          0.96,
+          0
+        ],
+        "tipPos": [
+          0,
+          1.06,
+          -0.005
+        ],
+        "role": "skinned",
+        "chain": "spine"
+      },
+      {
+        "id": "spine",
+        "parent": "hips",
+        "jointPos": [
+          0,
+          1.06,
+          -0.005
+        ],
+        "tipPos": [
+          0,
+          1.24,
+          -0.01
+        ],
+        "role": "skinned",
+        "chain": "spine"
+      },
+      {
+        "id": "chest",
+        "parent": "spine",
+        "jointPos": [
+          0,
+          1.24,
+          -0.01
+        ],
+        "tipPos": [
+          0,
+          1.44,
+          -0.01
+        ],
+        "role": "skinned",
+        "chain": "spine"
+      },
+      {
+        "id": "neck",
+        "parent": "chest",
+        "jointPos": [
+          0,
+          1.44,
+          -0.01
+        ],
+        "tipPos": [
+          0,
+          1.535,
+          0.0
+        ],
+        "role": "skinned",
+        "chain": "spine"
+      },
+      {
+        "id": "head",
+        "parent": "neck",
+        "jointPos": [
+          0,
+          1.535,
+          0.0
+        ],
+        "tipPos": [
+          0,
+          1.72,
+          0.0
+        ],
+        "role": "skinned",
+        "chain": "spine"
+      },
+      {
+        "id": "jaw",
+        "parent": "head",
+        "jointPos": [
+          0,
+          1.548,
+          0.02
+        ],
+        "tipPos": [
+          0,
+          1.53,
+          0.09
+        ],
+        "role": "skinned",
+        "chain": "spine"
+      },
+      {
+        "id": "clavicle-l",
+        "parent": "chest",
+        "jointPos": [
+          0.03,
+          1.4,
+          -0.005
+        ],
+        "tipPos": [
+          0.185,
+          1.395,
+          -0.015
+        ],
+        "role": "skinned",
+        "chain": "arm"
+      },
+      {
+        "id": "upperarm-l",
+        "parent": "clavicle-l",
+        "jointPos": [
+          0.185,
+          1.395,
+          -0.015
+        ],
+        "tipPos": [
+          0.225,
+          1.115,
+          -0.025
+        ],
+        "role": "skinned",
+        "chain": "arm"
+      },
+      {
+        "id": "forearm-l",
+        "parent": "upperarm-l",
+        "jointPos": [
+          0.225,
+          1.115,
+          -0.025
+        ],
+        "tipPos": [
+          0.25,
+          0.865,
+          0.0
+        ],
+        "role": "skinned",
+        "chain": "arm"
+      },
+      {
+        "id": "hand-l",
+        "parent": "forearm-l",
+        "jointPos": [
+          0.25,
+          0.865,
+          0.0
+        ],
+        "tipPos": [
+          0.26,
+          0.69,
+          0.015
+        ],
+        "role": "rigid-socket",
+        "chain": "arm"
+      },
+      {
+        "id": "clavicle-r",
+        "parent": "chest",
+        "jointPos": [
+          -0.03,
+          1.4,
+          -0.005
+        ],
+        "tipPos": [
+          -0.185,
+          1.395,
+          -0.015
+        ],
+        "role": "skinned",
+        "chain": "arm"
+      },
+      {
+        "id": "upperarm-r",
+        "parent": "clavicle-r",
+        "jointPos": [
+          -0.185,
+          1.395,
+          -0.015
+        ],
+        "tipPos": [
+          -0.225,
+          1.115,
+          -0.025
+        ],
+        "role": "skinned",
+        "chain": "arm"
+      },
+      {
+        "id": "forearm-r",
+        "parent": "upperarm-r",
+        "jointPos": [
+          -0.225,
+          1.115,
+          -0.025
+        ],
+        "tipPos": [
+          -0.25,
+          0.865,
+          0.0
+        ],
+        "role": "skinned",
+        "chain": "arm"
+      },
+      {
+        "id": "hand-r",
+        "parent": "forearm-r",
+        "jointPos": [
+          -0.25,
+          0.865,
+          0.0
+        ],
+        "tipPos": [
+          -0.26,
+          0.69,
+          0.015
+        ],
+        "role": "rigid-socket",
+        "chain": "arm"
+      },
+      {
+        "id": "thigh-l",
+        "parent": "hips",
+        "jointPos": [
+          0.095,
+          0.92,
+          0.0
+        ],
+        "tipPos": [
+          0.1,
+          0.5,
+          0.005
+        ],
+        "role": "skinned",
+        "chain": "leg"
+      },
+      {
+        "id": "shin-l",
+        "parent": "thigh-l",
+        "jointPos": [
+          0.1,
+          0.5,
+          0.005
+        ],
+        "tipPos": [
+          0.105,
+          0.085,
+          -0.01
+        ],
+        "role": "skinned",
+        "chain": "leg"
+      },
+      {
+        "id": "foot-l",
+        "parent": "shin-l",
+        "jointPos": [
+          0.105,
+          0.085,
+          -0.01
+        ],
+        "tipPos": [
+          0.11,
+          0.02,
+          0.16
+        ],
+        "role": "rigid-socket",
+        "chain": "leg"
+      },
+      {
+        "id": "thigh-r",
+        "parent": "hips",
+        "jointPos": [
+          -0.095,
+          0.92,
+          0.0
+        ],
+        "tipPos": [
+          -0.1,
+          0.5,
+          0.005
+        ],
+        "role": "skinned",
+        "chain": "leg"
+      },
+      {
+        "id": "shin-r",
+        "parent": "thigh-r",
+        "jointPos": [
+          -0.1,
+          0.5,
+          0.005
+        ],
+        "tipPos": [
+          -0.105,
+          0.085,
+          -0.01
+        ],
+        "role": "skinned",
+        "chain": "leg"
+      },
+      {
+        "id": "foot-r",
+        "parent": "shin-r",
+        "jointPos": [
+          -0.105,
+          0.085,
+          -0.01
+        ],
+        "tipPos": [
+          -0.11,
+          0.02,
+          0.16
+        ],
+        "role": "rigid-socket",
+        "chain": "leg"
+      },
+      {
+        "id": "hem-f",
+        "parent": "hips",
+        "jointPos": [
+          0,
+          0.88,
+          0.14
+        ],
+        "tipPos": [
+          0,
+          0.74,
+          0.15
+        ],
+        "role": "auxiliary-spring",
+        "chain": "hem"
+      },
+      {
+        "id": "hem-b",
+        "parent": "hips",
+        "jointPos": [
+          0,
+          0.88,
+          -0.13
+        ],
+        "tipPos": [
+          0,
+          0.74,
+          -0.14
+        ],
+        "role": "auxiliary-spring",
+        "chain": "hem"
+      },
+      {
+        "id": "hem-l",
+        "parent": "hips",
+        "jointPos": [
+          0.19,
+          0.88,
+          0.0
+        ],
+        "tipPos": [
+          0.2,
+          0.74,
+          0.0
+        ],
+        "role": "auxiliary-spring",
+        "chain": "hem"
+      },
+      {
+        "id": "hem-r",
+        "parent": "hips",
+        "jointPos": [
+          -0.19,
+          0.88,
+          0.0
+        ],
+        "tipPos": [
+          -0.2,
+          0.74,
+          0.0
+        ],
+        "role": "auxiliary-spring",
+        "chain": "hem"
+      }
+    ],
+    "auxiliary": [
+      "hem-f",
+      "hem-b",
+      "hem-l",
+      "hem-r"
+    ],
+    "morphChannels": [],
+    "faceDrivers": {
+      "jaw": "rotate -X up to 0.14 rad from voice RMS",
+      "faceBlend": "closed->open texture mix from voice RMS"
+    },
+    "posedJoints": "driven at runtime by public/anim/dance.json (MediaPipe capture + hand keys) and the idle clip"
+  }
+}

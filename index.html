@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#07080b" />
+    <title>刁一次</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <canvas id="stage"></canvas>
+    <div id="loading">加载中…</div>
+    <div id="ui" hidden>
+      <div class="hint">拖动旋转 · 双指缩放</div>
+      <div class="buttons">
+        <button id="btn-once" class="btn btn-once" type="button">刁一次</button>
+        <button id="btn-loop" class="btn btn-loop" type="button" aria-pressed="false">一直刁</button>
+      </div>
+    </div>
+    <div id="compare" hidden>
+      <video id="compare-video" muted playsinline preload="none"></video>
+      <div class="compare-bar">
+        <input id="compare-scrub" type="range" min="0" max="3.45" step="0.0333" value="0" aria-label="对照时间" />
+        <span id="compare-time">0.00 s</span>
+      </div>
+    </div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
